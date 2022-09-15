@@ -1,1 +1,1 @@
-__cpp_decltype
+ht(th('jh'ytj'(yj')))
