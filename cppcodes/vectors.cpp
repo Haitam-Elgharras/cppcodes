@@ -77,4 +77,4 @@ int main() {
   std::cout << is_palindrome("ada") << "\n";
   std::cout << is_palindrome("lovelace") << "\n";
   
-}
+}*/

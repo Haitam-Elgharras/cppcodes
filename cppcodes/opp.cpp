@@ -1,9 +1,9 @@
 #include <iostream>
-using namespace std ; 
+using namespace std ;
 //we say that empolyee is a class 
 class employee {
 public: // we have three types public private , protected 
-// but with pri et pro anything inside the object you can't acess to it 
+// but with pri  anything inside the object you can't acess to it 
 string Name ;
 string Company ;
 int Age ;
