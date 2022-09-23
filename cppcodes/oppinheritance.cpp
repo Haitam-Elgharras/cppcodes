@@ -33,7 +33,8 @@ Age = age ;
 }
 //one using of polymorphism
  virtual void work()
-{
+{/*virtual means thats if any implimentations of this fonction in derived class excute theme else excute
+this fonction here */
     cout <<Name<<"  is teaching in emp school the "<<endl  ;
 }
 };
