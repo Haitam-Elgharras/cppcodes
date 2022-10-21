@@ -1,5 +1,5 @@
 #include <iostream>
-
+// read
 int main()
 { // il faut bien conaitre que pour declaré string il faut ecrire std::string
 
