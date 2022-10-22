@@ -7,7 +7,6 @@ int main() {
   
   // Declare another vector here:
   std::vector<double> subway_child; //you can declare a vector without a size indication
-  //but to add elements its obligatory to use .push_back it start from the indice 0 
     std::vector<double> location(2);//to initialize the size 
 /*si on fait l'initialisation et apres on utilise la fonction push_back 
 la fonction ajoutes des nouvelles cases pour remplir car les cases sont deja remplir par 0 , pour bien compris 
@@ -78,17 +77,4 @@ int main() {
   std::cout << is_palindrome("ada") << "\n";
   std::cout << is_palindrome("lovelace") << "\n";
   
-}*/
-
-diffrence between lentgth and size 
-/*#include<iostream>
-#include<vector>
-using namespace std ; 
-int main(){
-vector<string>  strs={"haitam","tam24","elgharras"} ;
-int size , lng0 ;
-    size = strs.size(); 
-     cout << size <<endl ;
-     lng0 = strs[1].length() ; 
-cout << lng0 <<endl ;
 }*/
