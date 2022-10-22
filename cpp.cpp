@@ -1,7 +1,7 @@
 #include <iostream>
 int main()
 { // il faut bien conaitre que pour declaré string il faut ecrire std::string
-
+  // add
   std::cout << "Hello World!\n";
   std::cout << "Hello haitam!\n";
   int score = 185;
