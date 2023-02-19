@@ -7,7 +7,11 @@ int main()
   int score = 185;
   std::cout << score << "\ndo you understand ?";
   score = 0;
-
+  // pour préciser le nombre apres la virgule
+  // declare #include <iomanip>
+  cout << fixed;
+  cout << setprecision(2);
+  cout << pow(pow(a, 2) + pow(b, 2), 0.5);
   // Output
   std::cout << "Player score:" << score << "\n";
   double tempf = 83.0;

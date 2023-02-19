@@ -36,6 +36,8 @@ public:
     bool isValid(string s)
     {
         stack<char> st;
+        if (s.size() != 0)
+            return false;
         int i;
         for (i = 0; i < s.size(); i++)
         {
