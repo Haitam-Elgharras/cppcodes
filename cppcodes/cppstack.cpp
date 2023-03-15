@@ -45,6 +45,7 @@ public:
                 st.push(s[i]);
             else
             {
+                //  {}{}
                 if (st.empty() || (st.top() == '(' && s[i] != ')') || (st.top() == '[' && s[i] != ']') || (st.top() == '{' && s[i] != '}'))
                     return false;
                 st.pop();

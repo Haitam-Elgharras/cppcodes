@@ -66,6 +66,7 @@ ou un pointeur vers la classe de base.
 int main()
 {
   // new returns a pointer that's why we declare shape *shapes[]
+  // what the shapes will take as methods ? circle or shape ?
   Shape *shapes[3];
   shapes[0] = new Shape;
   shapes[1] = new Circle;

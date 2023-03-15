@@ -1,35 +1,255 @@
-#include <iostream>
-#include <string>
-#include <math.h>
-using namespace std;
-class COMPLEXE
-{
 
-    double coeffReel, CoeffImaginaire;
+// last exo
+
+/*#include <iostream>
+using namespace std;
+
+class point
+{
+    int x, y;
 
 public:
-    void Zmodule()
-    {
-        cout << "le module de Z est " << sqrt(pow(coeffReel, 2) + pow(CoeffImaginaire, 2)) << endl;
-    }
-    void Zargument()
-    {
-
-        if (coeffReel != 0)
-            cout
-                << "largument de Z est " << atan(CoeffImaginaire / coeffReel) << endl;
-        else
-            cout << "err";
-    }
-    COMPLEXE(float Coeffimaginaire, float coeffreel)
-    {
-        coeffReel = coeffreel;
-        CoeffImaginaire = CoeffImaginaire;
-    }
+    point();
+    point(int);
+    point(int, int);
+    void affiche();
+    void affiche(char *);
 };
+
+point::point()
+{
+    x = y = 0;
+}
+point::point(int val)
+{
+    x = y = val;
+}
+point::point(int val1, int val2)
+{
+    x = val1;
+    y = val2;
+}
+void point::affiche()
+{
+    cout << " :x= " << x << " et y= " << y << endl;
+}
+void point::affiche(char *name)
+{
+    cout << *name;
+    affiche();
+}
+
 int main()
 {
-    COMPLEXE Z(0, 1);
-    Z.Zmodule();
-    Z.Zargument();
+    char newName;
+    cin >> newName;
+    point p1(1, 3);
+    p1.affiche(&newName);
+    point p2(5);
+    cin >> newName;
+    for (int i = 0; i < 90; i++)
+    {
+        p2.affiche(&newName);
+    }
+    point p3;
+    cin >> newName;
+    p3.affiche(&newName);
+}*/
+
+// ###########################################################################################################
+
+// constructor called at main objects ?
+
+/*#include <iostream>
+
+class Point
+{
+public:
+    // Constructor
+    Point(int x, int y) : x_(x), y_(y)
+    {
+        std::cout << "Constructor called for Point (" << x_ << ", " << y_ << ")" << std::endl;
+    }
+
+    // Destructor
+    ~Point()
+    {
+        std::cout << "Destructor called for Point (" << x_ << ", " << y_ << ")" << std::endl;
+    }
+
+private:
+    int x_;
+    int y_;
+};
+
+// Function with static variable of Point class
+void test()
+{
+    static Point staticPoint(1, 2);
+    std::cout << "Inside test function" << std::endl;
+}
+
+int main()
+{
+    // Create object of Point class in main
+    test();
+
+    Point point(3, 4);
+    std::cout << "Inside main function" << std::endl;
+
+    // Call test function
+
+    std::cout << "Exiting main function" << std::endl;
+    return 0;
+}*/
+
+// ##############################################################################################
+
+// pointer point to a deallocated memory?
+
+/*#include <iostream>
+
+class Point
+{
+public:
+    Point(int x, int y) : x_(x), y_(y)
+    {
+        std::cout << "Constructor called for Point (" << x_ << ", " << y_ << ")" << std::endl;
+    }
+
+    ~Point()
+    {
+        std::cout << "Destructor called for Point (" << x_ << ", " << y_ << ")" << std::endl;
+    }
+
+    void affiche()
+    {
+        std::cout << "Accessing deleted memory: (" << this->x_ << ", " << this->y_ << ")" << std::endl;
+    }
+
+private:
+    int x_;
+    int y_;
+};
+
+void test(Point *ptr)
+{
+    std::cout << "Deleting Point from test function" << std::endl;
+    delete ptr;
+}
+
+int main()
+{
+    Point *ptr1 = new Point(1, 2);
+    Point *ptr2 = ptr1;
+    std::cout << "Point created" << std::endl;
+
+    // show before delete
+    ptr1->affiche();
+
+    // will delete the adress pointed by ptr1 so there so we can't acess to this adress from any pointer point to this adress
+    test(ptr1);
+
+    // Accessing the deleted memory through ptr2 & ptr1 can lead to undefined behavior
+    ptr1->affiche(); // Accessing deleted memory: (807344064, 488)
+    ptr2->affiche(); // Accessing deleted memory: (807344064, 488)
+
+    return 0;
+}*/
+
+// #############################################################################################
+
+// the copy constructor
+
+/*
+In C++, when you copy an object, a copy constructor is called to create a new object with the same values
+ as the original object. If you don't define a copy constructor explicitly, the compiler will generate a default copy constructor
+  that performs a shallow copy of the object's members.
+*/
+
+/*#include <iostream>
+using namespace std;
+class Point
+{
+public:
+    Point(int x, int y) : x_(x), y_(y)
+    {
+        std::cout << "Constructor called for Point (" << x_ << ", " << y_ << ")" << std::endl;
+    }
+
+    Point(const Point &other) : x_(other.x_), y_(other.y_)
+    {
+        std::cout << "Copy constructor called for Point (" << x_ << ", " << y_ << ")" << std::endl;
+    }
+    void affiche()
+    {
+        cout << this->x_;
+        cout << this->y_;
+    }
+
+private:
+    int x_;
+    int y_;
+};
+
+int main()
+{
+    Point a(1, 2);
+
+    Point b = a;
+    std::cout << "Copying Point" << std::endl;
+    b.affiche();
+
+    return 0;
+}
+*/
+
+// #######################################################################################################
+
+// if the object has dynamic elements we have only way to solve this problem
+/*
+ *problem of encapsulation
+ *problem of commun memory
+ *commun changes
+ */
+
+// If the Point class has pointers as members, then the default copy constructor generated by the compiler will perform a shallow copy of those pointers.This means that the copied object will have pointers that point to the same memory locations as the original object, which can lead to problems if one object modifies the memory through the pointer.
+
+//                                                                                                                                                                                                                                                                            To avoid these problems,
+//     you need to define a copy constructor that performs a deep copy of the pointers.Here's an example of how to do this:
+
+#include <iostream>
+
+class Point
+{
+public:
+    Point(int x, int y) : x_(new int(x)), y_(new int(y))
+    {
+        std::cout << "Constructor called for Point (" << *x_ << ", " << *y_ << ")" << std::endl;
+    }
+
+    Point(const Point &other) : x_(new int(*other.x_)), y_(new int(*other.y_))
+    {
+        std::cout << "Copy constructor called for Point (" << *x_ << ", " << *y_ << ")" << std::endl;
+    }
+
+    ~Point()
+    {
+        std::cout << "Destructor called for Point (" << *x_ << ", " << *y_ << ")" << std::endl;
+        delete x_;
+        delete y_;
+    }
+
+private:
+    int *x_;
+    int *y_;
+};
+
+int main()
+{
+    Point a(1, 2);
+    Point b = a;
+    std::cout << "Copying Point" << std::endl;
+
+    return 0;
 }

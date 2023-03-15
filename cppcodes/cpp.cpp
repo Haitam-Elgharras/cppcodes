@@ -1,4 +1,5 @@
 #include <iostream>
+using namespace std;
 int main()
 { // il faut bien conaitre que pour declaré string il faut ecrire std::string
   // add
@@ -10,8 +11,6 @@ int main()
   // pour préciser le nombre apres la virgule
   // declare #include <iomanip>
   cout << fixed;
-  cout << setprecision(2);
-  cout << pow(pow(a, 2) + pow(b, 2), 0.5);
   // Output
   std::cout << "Player score:" << score << "\n";
   double tempf = 83.0;
@@ -57,6 +56,29 @@ bool: true/false*/
     std::cout << "Tails\n";
   }
   // CONDITIONALS &LOGIC
+
+  return 0;
+}
+
+// ##################################################################################################
+// passage par reference
+
+void passByAddress(int *ptr)
+{
+  *ptr = 42;
+}
+
+void passByReference(int &ref)
+{
+  ref = 42;
+}
+
+int main()
+{
+  int x = 0;
+
+  passByAddress(&x);  // x vaut maintenant 42
+  passByReference(x); // x vaut toujours 42
 
   return 0;
 }

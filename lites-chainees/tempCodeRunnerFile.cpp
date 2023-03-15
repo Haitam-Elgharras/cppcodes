@@ -1,0 +1,1 @@
+(float)stoi(b) / (float)stoi(a)
