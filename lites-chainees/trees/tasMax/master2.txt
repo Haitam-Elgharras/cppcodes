@@ -1,0 +1,11 @@
+const categorie = document.createElement("select");
+  // categorie.classList.add("categorie");
+  // categorie.style = "margin-left: 10px; border-radius: 5px;";
+  // const categories = await fetchCategories();
+  // categories.forEach((e) => {
+  //   const option = document.createElement("option");
+  //   option.value = e.idcategorie;
+  //   option.textContent = e.nom;
+  //   categorie.appendChild(option);
+  // });
+  // section.appendChild(categorie);

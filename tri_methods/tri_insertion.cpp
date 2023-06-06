@@ -4,7 +4,7 @@
  sorted after it (j>=0 && j<j+1) if we find that this j bigger than key we change the place of the j to the place of the key
  ....
  */
-void insertion_sort(int arr[], int n)
+void insertion_sort(int arr[], int n) // la complixité est O(n^2)
 {
   int i, key, j;
   for (i = 1; i < n; i++)

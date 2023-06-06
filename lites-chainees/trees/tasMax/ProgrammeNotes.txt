@@ -1,0 +1,15 @@
+*Dans ce programme de test(TasMax.c), j'ai répété exactement ce que j'ai fait lors de l'examen,
+->le max et correctement returné.
+-> il réussit à trier parfaitement un tableau d'entiers.
+->Le programme respecte les propriétés d'un tas maximum, où la racine d'un sous-arbre est toujours supérieure ou égale à ses fils.
+
+
+*Cependant, après les tests, j'ai remarqué un problème avec les fonctions d'insertion (insert) et de suppression (supprimer).
+ Elles ne garantissent pas que les éléments restent toujours à leur position correcte dans le sous-arbre.
+ Il est possible que leur position change en fonction de leur valeur, ce qui peut altérer l'ordre du tas.
+
+*aprés la révision de cours j'ai trouver la relation entre l'indice de l'élément et ses fils et père
+tq le père est (i-1)/2 et les fils sont 2*i+1 et 2*i+2
+
+et on utilisant cette relation j'ai corrigé les fonctions d'insertion et de suppression
+et j'ai ajouter la version corrigé dans le fichier TaxMaxPreserve.c

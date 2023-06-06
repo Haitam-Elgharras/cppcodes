@@ -1,52 +1,61 @@
-#include <iostream>
-#include <chrono>
-//Mesure expérimentale en c++
-unsigned long long pow_recursive(unsigned long long a, unsigned long long n) {
-  if (n == 0) {
-    return 1;
-  }
+#include <stdio.h>
+#include <stdlib.h>
 
-  unsigned long long b = pow_recursive(a, n / 2);
+typedef struct element
+{
+  int data;
+  struct element *next;
+} Element;
 
-  if (n % 2 == 0) {
-    return b * b;
-  } else {
-    return a * b * b;
+Element *getLast(Element *L)
+{
+  Element *current = L;
+  while (current->next != NULL)
+  {
+    current = current->next;
   }
-}
-unsigned long long pow2_recursive(unsigned long long a, unsigned long long n) {
-  if (n == 0) {
-    return 1;
-  }
-else {return a*pow2_recursive(a,n-1);}
+  return current;
 }
 
-int main() {
-  unsigned long long a, n;
-  std::cout << "Enter the base number: ";
-  std::cin >> a;
-  std::cout << "Enter the exponent: ";
-  std::cin >> n;
- 
+Element *createElement(int data)
+{
+  Element *e = (Element *)malloc(sizeof(Element));
+  e->data = data;
+  e->next = NULL;
+  return e;
+}
 
+void insertData(int data, Element *L)
+{
+  Element *e = createElement(data);
+  if (L == NULL)
+  {
+    L = e;
+    return;
+  }
+  getLast(L)->next = e;
+}
 
-  auto start = std::chrono::high_resolution_clock::now();
-  unsigned long long result = pow_recursive(a, n);
-  auto end = std::chrono::high_resolution_clock::now();
- 
+void displayList(Element *L)
+{
+  Element *current = L;
+  while (current != NULL)
+  {
+    printf("%d ", current->data);
+    current = current->next;
+  }
+  printf("\n");
+}
 
-  auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-  std::cout << a << "^" << n << " = " << result << std::endl;   
-  std::cout << "Time spent with the O(log2(n)): " << duration.count() << " microseconds" << std::endl;
-
-
-   auto start2 = std::chrono::high_resolution_clock::now();
-  unsigned long long result2 = pow2_recursive(a, n);
-  auto end2 = std::chrono::high_resolution_clock::now();
-
-   auto duration2 = std::chrono::duration_cast<std::chrono::microseconds>(end2 - start2);
-  std::cout << a << "^" << n << " = " << result2 << std::endl;   
-  std::cout << "Time spent with the O(n): " << duration2.count() << " microseconds" << std::endl;
-
+int main()
+{
+  Element *L;
+  L = NULL;
+  L = createElement(0);
+  insertData(1, L);
+  insertData(2, L);
+  insertData(3, L);
+  insertData(4, L);
+  displayList(L);
   return 0;
 }

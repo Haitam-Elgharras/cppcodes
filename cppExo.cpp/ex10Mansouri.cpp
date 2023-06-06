@@ -1,255 +1,411 @@
 
-// last exo
+// // last exo
 
-/*#include <iostream>
-using namespace std;
+// /*#include <iostream>
+// using namespace std;
 
-class point
-{
-    int x, y;
+// class point
+// {
+//     int x, y;
 
-public:
-    point();
-    point(int);
-    point(int, int);
-    void affiche();
-    void affiche(char *);
-};
+// public:
+//     point();
+//     point(int);
+//     point(int, int);
+//     void affiche();
+//     void affiche(char *);
+// };
 
-point::point()
-{
-    x = y = 0;
-}
-point::point(int val)
-{
-    x = y = val;
-}
-point::point(int val1, int val2)
-{
-    x = val1;
-    y = val2;
-}
-void point::affiche()
-{
-    cout << " :x= " << x << " et y= " << y << endl;
-}
-void point::affiche(char *name)
-{
-    cout << *name;
-    affiche();
-}
+// point::point()
+// {
+//     x = y = 0;
+// }
+// point::point(int val)
+// {
+//     x = y = val;
+// }
+// point::point(int val1, int val2)
+// {
+//     x = val1;
+//     y = val2;
+// }
+// void point::affiche()
+// {
+//     cout << " :x= " << x << " et y= " << y << endl;
+// }
+// void point::affiche(char *name)
+// {
+//     cout << *name;
+//     affiche();
+// }
 
-int main()
-{
-    char newName;
-    cin >> newName;
-    point p1(1, 3);
-    p1.affiche(&newName);
-    point p2(5);
-    cin >> newName;
-    for (int i = 0; i < 90; i++)
-    {
-        p2.affiche(&newName);
-    }
-    point p3;
-    cin >> newName;
-    p3.affiche(&newName);
-}*/
+// int main()
+// {
+//     char newName;
+//     cin >> newName;
+//     point p1(1, 3);
+//     p1.affiche(&newName);
+//     point p2(5);
+//     cin >> newName;
+//     for (int i = 0; i < 90; i++)
+//     {
+//         p2.affiche(&newName);
+//     }
+//     point p3;
+//     cin >> newName;
+//     p3.affiche(&newName);
+// }*/
 
-// ###########################################################################################################
+// // ###########################################################################################################
 
-// constructor called at main objects ?
+// // constructor called at main objects ? :yes
 
-/*#include <iostream>
+// /*#include <iostream>
 
-class Point
-{
-public:
-    // Constructor
-    Point(int x, int y) : x_(x), y_(y)
-    {
-        std::cout << "Constructor called for Point (" << x_ << ", " << y_ << ")" << std::endl;
-    }
+// class Point
+// {
+// public:
+//     // Constructor
+//     Point(int x, int y) : x_(x), y_(y)
+//     {
+//         std::cout << "Constructor called for Point (" << x_ << ", " << y_ << ")" << std::endl;
+//     }
 
-    // Destructor
-    ~Point()
-    {
-        std::cout << "Destructor called for Point (" << x_ << ", " << y_ << ")" << std::endl;
-    }
+//     // Destructor
+//     ~Point()
+//     {
+//         std::cout << "Destructor called for Point (" << x_ << ", " << y_ << ")" << std::endl;
+//     }
 
-private:
-    int x_;
-    int y_;
-};
+// private:
+//     int x_;
+//     int y_;
+// };
 
-// Function with static variable of Point class
-void test()
-{
-    static Point staticPoint(1, 2);
-    std::cout << "Inside test function" << std::endl;
-}
+// // Function with static variable of Point class
+// void test()
+// {
+//     static Point staticPoint(1, 2);
+//     std::cout << "Inside test function" << std::endl;
+// }
 
-int main()
-{
-    // Create object of Point class in main
-    test();
+// int main()
+// {
+//     // Create object of Point class in main
+//     test();
 
-    Point point(3, 4);
-    std::cout << "Inside main function" << std::endl;
+//     Point point(3, 4);
+//     std::cout << "Inside main function" << std::endl;
 
-    // Call test function
+//     // Call test function
 
-    std::cout << "Exiting main function" << std::endl;
-    return 0;
-}*/
+//     std::cout << "Exiting main function" << std::endl;
+//     return 0;
+// }*/
 
-// ##############################################################################################
+// // ##############################################################################################
 
-// pointer point to a deallocated memory?
+// // pointer point to a deallocated memory?
 
-/*#include <iostream>
+// /*#include <iostream>
 
-class Point
-{
-public:
-    Point(int x, int y) : x_(x), y_(y)
-    {
-        std::cout << "Constructor called for Point (" << x_ << ", " << y_ << ")" << std::endl;
-    }
+// class Point
+// {
+// public:
+//     Point(int x, int y) : x_(x), y_(y)
+//     {
+//         std::cout << "Constructor called for Point (" << x_ << ", " << y_ << ")" << std::endl;
+//     }
 
-    ~Point()
-    {
-        std::cout << "Destructor called for Point (" << x_ << ", " << y_ << ")" << std::endl;
-    }
+//     ~Point()
+//     {
+//         std::cout << "Destructor called for Point (" << x_ << ", " << y_ << ")" << std::endl;
+//     }
 
-    void affiche()
-    {
-        std::cout << "Accessing deleted memory: (" << this->x_ << ", " << this->y_ << ")" << std::endl;
-    }
+//     void affiche()
+//     {
+//         std::cout << "Accessing deleted memory: (" << this->x_ << ", " << this->y_ << ")" << std::endl;
+//     }
 
-private:
-    int x_;
-    int y_;
-};
+// private:
+//     int x_;
+//     int y_;
+// };
 
-void test(Point *ptr)
-{
-    std::cout << "Deleting Point from test function" << std::endl;
-    delete ptr;
-}
+// void test(Point *ptr)
+// {
+//     std::cout << "Deleting Point from test function" << std::endl;
+//     delete ptr;
+// }
 
-int main()
-{
-    Point *ptr1 = new Point(1, 2);
-    Point *ptr2 = ptr1;
-    std::cout << "Point created" << std::endl;
+// int main()
+// {
+//     Point *ptr1 = new Point(1, 2);
+//     Point *ptr2 = ptr1;
+//     std::cout << "Point created" << std::endl;
 
-    // show before delete
-    ptr1->affiche();
+//     // show before delete
+//     ptr1->affiche();
 
-    // will delete the adress pointed by ptr1 so there so we can't acess to this adress from any pointer point to this adress
-    test(ptr1);
+//     // will delete the adress pointed by ptr1 so there so we can't acess to this adress from any pointer point to this adress
+//     test(ptr1);
 
-    // Accessing the deleted memory through ptr2 & ptr1 can lead to undefined behavior
-    ptr1->affiche(); // Accessing deleted memory: (807344064, 488)
-    ptr2->affiche(); // Accessing deleted memory: (807344064, 488)
+//     // Accessing the deleted memory through ptr2 & ptr1 can lead to undefined behavior
+//     ptr1->affiche(); // Accessing deleted memory: (807344064, 488)
+//     ptr2->affiche(); // Accessing deleted memory: (807344064, 488)
 
-    return 0;
-}*/
+//     return 0;
+// }*/
 
-// #############################################################################################
+// // #############################################################################################
 
-// the copy constructor
+// // the copy constructor
 
-/*
-In C++, when you copy an object, a copy constructor is called to create a new object with the same values
- as the original object. If you don't define a copy constructor explicitly, the compiler will generate a default copy constructor
-  that performs a shallow copy of the object's members.
-*/
+// /*
+// In C++, when you copy an object, a copy constructor is called to create a new object with the same values
+//  as the original object. If you don't define a copy constructor explicitly, the compiler will generate a default copy constructor
+//   that performs a shallow copy of the object's members.
+// */
 
-/*#include <iostream>
-using namespace std;
-class Point
-{
-public:
-    Point(int x, int y) : x_(x), y_(y)
-    {
-        std::cout << "Constructor called for Point (" << x_ << ", " << y_ << ")" << std::endl;
-    }
+// /*#include <iostream>
+// using namespace std;
+// class Point
+// {
+// public:
+//     Point(int x, int y) : x_(x), y_(y)
+//     {
+//         std::cout << "Constructor called for Point (" << x_ << ", " << y_ << ")" << std::endl;
+//     }
 
-    Point(const Point &other) : x_(other.x_), y_(other.y_)
-    {
-        std::cout << "Copy constructor called for Point (" << x_ << ", " << y_ << ")" << std::endl;
-    }
-    void affiche()
-    {
-        cout << this->x_;
-        cout << this->y_;
-    }
+//     Point(const Point &other) : x_(other.x_), y_(other.y_)
+//     {
+//         std::cout << "Copy constructor called for Point (" << x_ << ", " << y_ << ")" << std::endl;
+//     }
+//     void affiche()
+//     {
+//         cout << this->x_;
+//         cout << this->y_;
+//     }
 
-private:
-    int x_;
-    int y_;
-};
+// private:
+//     int x_;
+//     int y_;
+// };
 
-int main()
-{
-    Point a(1, 2);
+// int main()
+// {
+//     Point a(1, 2);
 
-    Point b = a;
-    std::cout << "Copying Point" << std::endl;
-    b.affiche();
+//     Point b = a;
+//     std::cout << "Copying Point" << std::endl;
+//     b.affiche();
 
-    return 0;
-}
-*/
+//     return 0;
+// }
+// */
 
-// #######################################################################################################
+// // #######################################################################################################
 
-// if the object has dynamic elements we have only way to solve this problem
-/*
- *problem of encapsulation
- *problem of commun memory
- *commun changes
- */
+// // if the object has dynamic elements we have only way to solve this problem
+// /*
+//  *problem of encapsulation
+//  *problem of commun memory
+//  *commun changes
+//  */
 
-// If the Point class has pointers as members, then the default copy constructor generated by the compiler will perform a shallow copy of those pointers.This means that the copied object will have pointers that point to the same memory locations as the original object, which can lead to problems if one object modifies the memory through the pointer.
+// // If the Point class has pointers as members, then the default copy constructor generated by the compiler will perform a shallow copy of those pointers.This means that the copied object will have pointers that point to the same memory locations as the original object, which can lead to problems if one object modifies the memory through the pointer.
 
-//                                                                                                                                                                                                                                                                            To avoid these problems,
-//     you need to define a copy constructor that performs a deep copy of the pointers.Here's an example of how to do this:
+// //                                                                                                                                                                                                                                                                            To avoid these problems,
+// //     you need to define a copy constructor that performs a deep copy of the pointers.Here's an example of how to do this:
+
+// #include <iostream>
+
+// class Point
+// {
+// public:
+//     Point(int x, int y) : x_(new int(x)), y_(new int(y))
+//     {
+//         std::cout << "Constructor called for Point (" << *x_ << ", " << *y_ << ")" << std::endl;
+//     }
+
+//     Point(const Point &other) : x_(new int(*other.x_)), y_(new int(*other.y_))
+//     {
+//         std::cout << "Copy constructor called for Point (" << *x_ << ", " << *y_ << ")" << std::endl;
+//     }
+
+//     ~Point()
+//     {
+//         std::cout << "Destructor called for Point (" << *x_ << ", " << *y_ << ")" << std::endl;
+//         delete x_;
+//         delete y_;
+//     }
+
+// private:
+//     int *x_;
+//     int *y_;
+// };
+
+// int main()
+// {
+//     Point a(1, 2);
+//     Point b = a;
+//     std::cout << "Copying Point" << std::endl;
+
+//     return 0;
+// }
 
 #include <iostream>
+using namespace std;
 
-class Point
+class Note
 {
-public:
-    Point(int x, int y) : x_(new int(x)), y_(new int(y))
-    {
-        std::cout << "Constructor called for Point (" << *x_ << ", " << *y_ << ")" << std::endl;
-    }
-
-    Point(const Point &other) : x_(new int(*other.x_)), y_(new int(*other.y_))
-    {
-        std::cout << "Copy constructor called for Point (" << *x_ << ", " << *y_ << ")" << std::endl;
-    }
-
-    ~Point()
-    {
-        std::cout << "Destructor called for Point (" << *x_ << ", " << *y_ << ")" << std::endl;
-        delete x_;
-        delete y_;
-    }
-
 private:
-    int *x_;
-    int *y_;
+    float valeur; // la valeur de la note
+
+public:
+    // Première insertion de la valeur (0<=val<=20)
+    void input(float value);
+
+    // Imprime la valeur de la note
+    void print();
+
+    // Modifie la valeur de la note
+    void set(float newValue);
+
+    // Récupère la valeur actuelle de la note
+    float get();
+
+    // Donne une appréciation en fonction de la note
+    void apprecier();
+    void harmonise();
+    static float Moyenne(Note *notes, int nbNotes);
+    static void appreciation(Note *notes, int nbNotes);
 };
+
+void Note::harmonise()
+{
+    if (this->valeur < 8)
+    {
+        this->valeur = 0;
+    }
+    else
+    {
+        this->valeur = 8;
+    }
+}
+
+void Note::input(float value)
+{
+    if (value >= 0 && value <= 20)
+    {
+        this->valeur = value;
+    }
+}
+
+void Note::print()
+{
+    cout << "La valeur de la note est : " << valeur << endl;
+}
+
+void Note::set(float newValue)
+{
+    if (newValue >= 0 && newValue <= 20)
+    {
+        this->valeur = newValue;
+    }
+}
+
+float Note::get()
+{
+    // cout << "La valeur actuelle de la note est : " << valeur << endl;
+    return valeur;
+}
+
+void Note::apprecier()
+{
+    if (valeur >= 0 && valeur < 10)
+    {
+        cout << "Insuffisant" << endl;
+    }
+    else if (valeur < 12)
+    {
+        cout << "Passable" << endl;
+    }
+    else if (valeur < 14)
+    {
+        cout << "Assez bien" << endl;
+    }
+    else if (valeur < 16)
+    {
+        cout << "Bien" << endl;
+    }
+    else
+    {
+        cout << "Tres bien" << endl;
+    }
+}
+
+float Note::Moyenne(Note *notes, int nbNotes)
+{
+    float total = 0;
+
+    for (int i = 0; i < nbNotes; i++)
+    {
+        total += notes[i].valeur;
+    }
+
+    return total / nbNotes;
+}
+
+void Note::appreciation(Note *notes, int nbNotes)
+{
+    for (int i = 0; i < nbNotes; i++)
+    {
+        cout << "Note " << i + 1 << ": ";
+        notes[i].apprecier();
+    }
+}
 
 int main()
 {
-    Point a(1, 2);
-    Point b = a;
-    std::cout << "Copying Point" << std::endl;
+    int nbEleves;
+
+    // saisie du nombre d'élèves de la classe
+    cout << "Saisissez le nombre d eleves dans la classe : ";
+    cin >> nbEleves;
+
+    // création du tableau des notes
+    Note *notes = new Note[nbEleves];
+
+    // boucle de saisie des n notes
+    for (int i = 0; i < nbEleves; i++)
+    {
+        float valeur;
+        cout << "Saisissez la note de l eleve " << i + 1 << " : ";
+        cin >> valeur;
+        notes[i].input(valeur);
+    }
+
+    // boucle d'affichage des notes et des appréciations
+    Note::appreciation(notes, nbEleves);
+
+    // affichage de la moyenne
+    cout << "La moyenne est : " << Note::Moyenne(notes, nbEleves) << endl;
+
+    // boucle sur les notes, si la note est < 15 alors on harmonise
+    for (int i = 0; i < nbEleves; i++)
+    {
+        if (notes[i].get() < 15)
+        {
+            notes[i].harmonise();
+        }
+    }
+
+    // affichage de la moyenne après harmonisation
+    cout << "La moyenne apres harmonisation est : " << Note::Moyenne(notes, nbEleves) << endl;
+
+    // libération de la mémoire allouée pour le tableau de notes
+    delete[] notes;
 
     return 0;
 }

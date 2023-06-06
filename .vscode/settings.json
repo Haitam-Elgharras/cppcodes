@@ -1,5 +1,5 @@
 {
-  "C_Cpp.errorSquiggles": "Enabled",
+  "C_Cpp.errorSquiggles": "disabled",
   "files.associations": {
     "iostream": "cpp",
     "array": "cpp",
@@ -45,7 +45,16 @@
     "stdexcept": "cpp",
     "streambuf": "cpp",
     "typeinfo": "cpp",
-    "chrono": "cpp"
+    "chrono": "cpp",
+    "ctime": "cpp",
+    "ratio": "cpp",
+    "fstream": "cpp",
+    "sstream": "cpp",
+    "complex": "cpp",
+    "stdlib.h": "c",
+    "tree.h": "c",
+    "cstring": "cpp",
+    "iomanip": "cpp"
   },
   "C_Cpp.vcFormat.indent.withinParentheses": "indent",
   "editor.defaultFormatter": "esbenp.prettier-vscode",

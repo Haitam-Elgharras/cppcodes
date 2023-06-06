@@ -119,7 +119,7 @@ public:
         cout << Name << "  is preparing the lesson of " << subject << endl;
     }
     // poly
-    void work()
+    void work() // override
     {
         cout << Name << "  is teaching in emp school the " << subject << endl;
     }

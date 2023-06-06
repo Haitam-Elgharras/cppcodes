@@ -2,6 +2,8 @@
 #include <chrono>
 #include <fstream>
 using namespace std;
+
+// t1 and t2 are two arrays tq t1.length+t2.length=T.length
 void diviser(int *T, int n, int *t1, int *t2)
 {
   int i, k;
@@ -15,6 +17,12 @@ void diviser(int *T, int n, int *t1, int *t2)
     t2[k] = T[i];
     k++;
   }
+  // we can combine the two loops in one loop
+  // for (i = 0; i < n / 2; i++)
+  // {
+  //   t1[i] = T[i];
+  //   t2[i] = T[i + n / 2];
+  // }
 }
 
 void fusion(int *t1, int n1, int *t2, int n2, int *T)
@@ -101,6 +109,7 @@ int main()
     n = i;
     // t=new int[n] est une instruction d'allocation dynamique de mémoire en C++
     int *T = new int[n];
+    cout << sizeof(T) << endl;
     for (j = 0; j < n; j++)
     {
       T[j] = n - j;
@@ -111,10 +120,11 @@ int main()
     auto end = chrono::high_resolution_clock::now();
     auto duration = chrono::duration_cast<chrono::microseconds>(end - start);
     // table affichage
-    //  for (int k = 0; k < n; k++)
-    //  {
-    //    cout << T[k] << "\t";
-    //  }
+    // for (int k = 0; k < n; k++)
+    // {
+    //   cout << T[k] << "\t";
+    // }
+
     // cout << endl;
     // cout << "table ";
     fichier << n << " " << duration.count() << endl;

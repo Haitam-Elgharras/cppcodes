@@ -149,6 +149,8 @@ int main()
 /*A destructor in C++ is a special member function that is called automatically
  when an object is destroyed or goes out of scope. Its primary purpose is to release
  any resources that were allocated during the lifetime of the object.
+- the element is destroyed with a lifo type (but just when going out of it scope)
+-the global objects are the last always
 
 In C++, a destructor has the same name as that of the class, preceded by a tilde (~),
  and it does not have any parameters or return type. For example,*/
@@ -257,9 +259,8 @@ would result in undefined behavior. However, the pointer variable P1 itself is s
 /*The pointer variable P1 itself is allocated on the stack, but the memory it points to
  (i.e., the point object created with new point(0,0)) is allocated on the heap.*/
 
+// In C++, stack and heap are two different memory regions where objects can be allocated.
 /*
-In C++, stack and heap are two different memory regions where objects can be allocated.
-
 Stack memory is used for local variables and function parameters. The stack is automatically managed by the system
  and is used for relatively small amounts of data. The lifetime of stack memory is limited to the scope of the function
   in which it is defined. When a function returns, the memory used by its stack is automatically freed.
@@ -322,5 +323,375 @@ int main()
     MyClass obj;
     obj.foo();
     obj.foo();
+    return 0;
+}
+
+// ###################################################################################################################
+
+// CH5
+
+// ###########################################################################################################
+
+// constructor (destructor) called at main objects ? : yes
+
+/*#include <iostream>
+
+class Point
+{
+public:
+    // Constructor
+    Point(int x, int y) : x_(x), y_(y)
+    {
+        std::cout << "Constructor called for Point (" << x_ << ", " << y_ << ")" << std::endl;
+    }
+
+    // Destructor
+    ~Point()
+    {
+        std::cout << "Destructor called for Point (" << x_ << ", " << y_ << ")" << std::endl;
+    }
+
+private:
+    int x_;
+    int y_;
+};
+
+// Function with static variable of Point class
+void test()
+{
+    static Point staticPoint(1, 2);
+    std::cout << "Inside test function" << std::endl;
+}
+
+int main()
+{
+    // Create object of Point class in main
+    test();
+
+    Point point(3, 4);
+    std::cout << "Inside main function" << std::endl;
+
+    // Call test function
+
+    std::cout << "Exiting main function" << std::endl;
+    return 0;
+}*/
+
+// ##############################################################################################
+
+// pointer point to a deallocated memory? :we can't acess to this adress from any pointer point to this adress
+
+/*#include <iostream>
+
+class Point
+{
+public:
+    Point(int x, int y) : x_(x), y_(y)
+    {
+        std::cout << "Constructor called for Point (" << x_ << ", " << y_ << ")" << std::endl;
+    }
+
+    ~Point()
+    {
+        std::cout << "Destructor called for Point (" << x_ << ", " << y_ << ")" << std::endl;
+    }
+
+    void affiche()
+    {
+        std::cout << "Accessing deleted memory: (" << this->x_ << ", " << this->y_ << ")" << std::endl;
+    }
+
+private:
+    int x_;
+    int y_;
+};
+
+void test(Point *ptr)
+{
+    std::cout << "Deleting Point from test function" << std::endl;
+    delete ptr;
+}
+
+int main()
+{
+    Point *ptr1 = new Point(1, 2);
+    Point *ptr2 = ptr1;
+    std::cout << "Point created" << std::endl;
+
+    // show before delete
+    ptr1->affiche();
+
+    // will delete the adress pointed by ptr1 so there so we can't acess to this adress from any pointer point to this adress
+    test(ptr1);
+
+    // Accessing the deleted memory through ptr2 & ptr1 can lead to undefined behavior
+    ptr1->affiche(); // Accessing deleted memory: (807344064, 488)
+    ptr2->affiche(); // Accessing deleted memory: (807344064, 488)
+
+    return 0;
+}*/
+
+// #############################################################################################
+
+// the copy constructor
+
+/*
+In C++, when you copy an object, a copy constructor is called to create a new object with the same values
+ as the original object. If you don't define a copy constructor explicitly, the compiler will generate a default copy constructor
+  that performs a shallow copy of the object's members.
+*/
+
+#include <iostream>
+using namespace std;
+class Point
+{
+public:
+    Point(int x, int y) : x_(x), y_(y)
+    {
+        std::cout << "Constructor called for Point (" << x_ << ", " << y_ << ")" << std::endl;
+    }
+
+    Point(const Point &other) : x_(other.x_), y_(other.y_)
+    {
+        std::cout << "Copy constructor called for Point (" << x_ << ", " << y_ << ")" << std::endl;
+    }
+    void affiche()
+    {
+        cout << this->x_;
+        cout << this->y_;
+    }
+
+private:
+    int x_;
+    int y_;
+};
+
+int main()
+{
+    Point a(1, 2);
+
+    Point b = a;
+    // or Point b(a);
+    std::cout << "Copying Point" << std::endl;
+    b.affiche();
+
+    return 0;
+}
+
+// #######################################################################################################
+
+// if the object has dynamic elements(or pointers) we have only way to solve this problem
+/*
+types of problems we have
+ *problem of encapsulation : if the 1st element has a private attributes
+ *problem of commun memory : the two ptrs will have the same memory
+ *commun changes : if we modify at the 1st ptr the 2nd will change
+ */
+
+/* If the Point class has pointers as members, then the default copy constructor generated by the compiler
+ will perform a shallow copy of those pointers.This means that the copied object will have pointers that point to
+  the same memory locations as the original object, which can lead to problems if one object modifies the memory through the pointer.*/
+
+//                                                                                                                                                                                                                                                                            To avoid these problems,
+//     you need to define a copy constructor that performs a deep copy of the pointers.Here's an example of how to do this:
+
+#include <iostream>
+
+class Point
+{
+public:
+    int *x_;
+    int *y_;
+    Point(int x, int y) : x_(new int(x)), y_(new int(y))
+    {
+        std::cout << "Constructor called for Point (" << *x_ << ", " << *y_ << ")" << std::endl;
+    }
+
+    // before declaring the copy constructor the *b.x=10 ; will change *b.x and and also *a.x
+    Point(const Point &other) : x_(new int(*other.x_)), y_(new int(*other.y_))
+    {
+        std::cout << "Copy constructor called for Point (" << *x_ << ", " << *y_ << ")" << std::endl;
+    }
+
+    ~Point()
+    {
+        std::cout << "Destructor called for Point (" << *x_ << ", " << *y_ << ")" << std::endl;
+        delete x_;
+        delete y_;
+    }
+};
+
+int main()
+{
+    Point a(1, 2);
+    Point b = a;
+    *b.x_ = 10;
+    std::cout << "Copying Point" << std::endl;
+
+    return 0;
+}
+
+// in this case the two objects has two different adresses but the adr's adresses  are the same
+#include <iostream>
+#include <conio.h>
+
+class liste
+{
+
+public:
+    int taille;
+    float *adr;
+    liste(int t);
+    ~liste();
+};
+
+liste::liste(int t)
+{
+    taille = t;
+    adr = new float[taille];
+    std::cout << "Adresse de l'objet : " << this << std::endl;
+    std::cout << "Adresse de tableau : " << adr << std::endl;
+}
+
+liste::~liste()
+{
+
+    std::cout << "Liberation de la place" << std::endl;
+    std::cout << "Adresse de tableau : " << adr << std::endl;
+    delete[] adr;
+}
+
+int main()
+{
+    std::cout << "Debut de main()" << std::endl;
+
+    liste a(3);
+    liste b = a;
+    b.adr[0] = 10;
+    std::cout << b.adr[0] << std::endl;
+    std::cout << a.adr[0];
+    std::cout
+        << "Fin de main()" << std::endl;
+    return 0;
+}
+
+/* in this (when having a dynamic attributes) case obligatory to work with copy constructor where we should use the reference passing obligatory
+and when meet the table do a loop in each element and copy the value not the adresses : here is the copy constructor*/
+liste::liste(const liste &other)
+{
+    // point b=a ; other is a it's the original object
+    taille = other.taille;
+    adr = new float[taille];
+    for (int i = 0; i < taille; i++)
+    {
+        adr[i] = other.adr[i];
+    }
+    std::cout << "Copy constructor called for List with size " << taille << std::endl;
+}
+
+//***************************************************
+
+// constructring and destructring of temporary objects
+
+class Point
+{
+private:
+    int x;
+    int y;
+
+public:
+    Point(int x, int y)
+    {
+        this->x = x;
+        this->y = y;
+        cout << "Constructing Point object at address: " << this << endl;
+    }
+
+    ~Point()
+    {
+        cout << "Destructing Point object at address: " << this << endl;
+    }
+};
+
+int main()
+{
+    Point a(0, 0);
+    a = Point(3, 4);
+    a = Point(5, 6);
+
+    /*
+    Constructing Point object at address: exd404dffc18 create the variable a
+    Constructing Point object at address: axd404dffc20 tmp (0,0) (and affecte it to a)
+    Destructing Point object at address: axd404dffc20 destroyed tmp
+    Constructing Point object at address: axd404dffc28 create tmp(3,4)...
+    Destructing Point object at address: axd404dffc28
+    Destructing Point object at address: axd4Ndffc18
+*/
+    return 0;
+}
+
+// #########################################################################################################################
+
+// when a function return an object what happens ?
+/*
+where is stocked the return object ? as we know the p will destroyed after foo finished !!
+In this example, the foo function returns a point object. When the foo function is called, a new point object p
+ is created and initialized with coordinates (3, 4). Then, p is returned by value to the caller,
+  which in this case is the main function.
+
+  when p is returned from foo(), a new copy of the point object is created using the copy constructor.
+  This copy is then returned to the caller. The copy is typically stored in a temporary location in memory,
+   often referred to as the return value register.
+
+   *NOTE if the returned object of the function has dynamic attr => copy constructor obligatory
+*/
+point foo()
+{
+    point p(3, 4);
+    return p;
+}
+
+int main()
+{
+    point p1 = foo();
+    p1.show();
+    return 0;
+}
+
+//*****************************************************
+// OBJECT OF OBJECT
+#include <iostream>
+#include <conio.h>
+using namespace std;
+class Point
+{
+    int x, y;
+
+public:
+    Point(int abs = 0, int ord = 0) : x(abs), y(ord)
+    {
+        cout << "point const ";
+    }
+};
+
+class PointColore
+{
+    Point p;
+    int couleur;
+
+public:
+    // the point constructor will be calling first casue we start with the first line
+    // before entring on the paint color constructor
+    PointColore(int abs = 0, int ord = 0, int coul = 0) : p(abs, ord)
+    {
+        cout << "color constr";
+        couleur = coul;
+    }
+};
+
+int main()
+{
+    PointColore pc(3, 9, 5);
+
     return 0;
 }

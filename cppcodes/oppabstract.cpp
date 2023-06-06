@@ -3,7 +3,8 @@ using namespace std;
 class instrument
 {
 public:
-    // this make the implimentaion of makesound obligatory to all derived classes
+    // polymorphisme
+    //  this make the implimentaion of makesound obligatory to all derived classes
     virtual void makesound() = 0; // it's a pure virtual fonction
     // every abstarct must have at least one pure v fonction
 };

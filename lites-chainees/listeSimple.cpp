@@ -136,8 +136,8 @@ void liste::addAfter(int valInserer, int valChercher)
             }
             if (tmp != NULL)
             {
-                noeud_t *newEl = new noeud_t;
-                newEl->data = valInserer;
+                // noeud_t *newEl = new noeud_t;
+                // newEl->data = valInserer;
                 newEl->next = tmp->next;
                 tmp->next = newEl;
             }

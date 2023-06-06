@@ -1,9 +1,9 @@
 /*Polymorphism is a key concept in object-oriented programming, and it refers to the ability of objects
- of different classes to be treated as objects of a common class. In C++, polymorphism is achieved
- through virtual functions and function overriding.
+of different classes to be treated as objects of a common class. In C++, polymorphism is achieved
+through virtual functions and function overriding.
 
 A virtual function is a member function in a base class that can be overridden in derived classes.
- When a virtual function is called through a pointer or reference to an object of a derived class,
+When a virtual function is called through a pointer or reference to an object of a derived class,
   the function implementation of the derived class is executed, rather than the one in the base class.
   This is known as dynamic dispatch, and it allows objects of different classes to be treated polymorphically.
 
@@ -48,7 +48,7 @@ public:
 /*les condition pour cree des fonction dans les classes dérivées (polymorphisme)
 
 Il existe plusieurs conditions pour définir des méthodes dans une classe dérivée
- qui implémentent le polymorphisme:
+qui implémentent le polymorphisme:
 
 La classe de base doit définir une méthode virtuelle pure (virtual void foo() = 0).
 
@@ -58,7 +58,7 @@ La méthode définie dans la classe dérivée doit avoir le même nom et
 la même signature que la méthode virtuelle pure définie dans la classe de base.
 
 La méthode définie dans la classe dérivée doit être déclarée avec le mot-clé override
- pour indiquer que c'est une surcharge de la méthode définie dans la classe de base.
+pour indiquer que c'est une surcharge de la méthode définie dans la classe de base.
 
 Les objets de la classe dérivée peuvent être stockés dans un tableau
 ou un pointeur vers la classe de base.
@@ -92,7 +92,7 @@ Drawing a square.*/
    * it is possible to use the example of polymorphism without pointers.
     You can use object references instead of pointers, like this:
 
-   */
+  */
   Animal animals[2];
   /*
     In the example, Dog() is a default constructor for the Dog class. A default constructor
@@ -118,12 +118,70 @@ it is no longer needed, or it will result in a memory leak.*/
   return 0;
 }
 
+// ################################## la résolution dynamique des liens#######################
+
+class Personne
+{
+public:
+  virtual void afficher();
+};
+
+void Personne::afficher()
+{
+  cout << "from an obj of Personne class" << endl;
+}
+
+class Etudiant : public Personne
+{
+public:
+  void afficher() override
+  {
+    // cout << "nom :" << nom << " specialite :" << specialite << endl;
+    cout << "from etudiant" << endl;
+  }
+};
+
+class Enseignant : public Personne
+{
+public:
+  void afficher() override
+  {
+    // cout << "nom :" << nom << " diplome :" << diplome << endl;
+    cout << "from enseignant" << endl;
+  }
+  float salaire();
+};
+
+void presenter(Personne &obj1, Personne &obj2, Personne &obj3)
+{
+  obj1.afficher();
+  obj2.afficher();
+  obj3.afficher();
+}
+
+int main()
+{
+  /*
+    la résolution dynamique des liens nécéssite deux choses indisponsable :
+      -utilisation du virtual methodes
+      -utilisation du passage par référence ou adresse
+
+    Si on n'utilise pas les deux la methode persenter va afficher pour n'import quel obj "from an obj of Personne class"
+    car il connue que les obj passé sont de type Personne et la seul solution c'est la RDL
+    */
+  Etudiant et;
+  Personne p;
+  Enseignant en;
+  presenter(p, et, en);
+  return 0;
+}
+
 /*
 *Here's an example to demonstrate the difference:
 #include <iostream>
 
 class Dog {
- public:
+public:
   Dog() { std::cout << "Dog created." << std::endl; }
   ~Dog() { std::cout << "Dog destroyed." << std::endl; }
 };
@@ -153,7 +211,7 @@ sous forme d'objets. Une classe abstraite peut définir des méthodes virtuelles
 qui sont des méthodes sans corps qui #doivent être surchargées dans les classes dérivées.
 
 Au contraire, une classe concrète est une classe qui peut être utilisée pour créer des objets.
- Elle peut définir des méthodes concrètes qui ont des corps, et des méthodes virtuelles
+Elle peut définir des méthodes concrètes qui ont des corps, et des méthodes virtuelles
   qui peuvent être surchargées dans les classes dérivées.*/
 /*
 #include <iostream>
@@ -182,12 +240,12 @@ En programmation orientée objet, la spécialisation et la généralisation sont
 qui décrivent la relation entre les classes.
 
 La spécialisation: est le processus de création d'une classe dérivée à partir d'une classe de base existante.
- La classe dérivée hérite des propriétés et des comportements de la classe de base, mais peut également ajouter
+La classe dérivée hérite des propriétés et des comportements de la classe de base, mais peut également ajouter
   ou surcharger des méthodes pour fournir une implémentation plus spécifique. La classe dérivée est considérée
   comme une spécialisation de la classe de base.
 
 La généralisation: est le processus inverse de la spécialisation. Elle consiste à définir une classe de base à partir
- de plusieurs classes dérivées. La classe de base encapsule les propriétés et les comportements communs aux classes dérivées,
+de plusieurs classes dérivées. La classe de base encapsule les propriétés et les comportements communs aux classes dérivées,
   et peut être utilisée pour représenter un ensemble plus large d'objets. la classe de base est considérées comme
   généralistaion  des classes dérivées
 
@@ -196,24 +254,24 @@ Voici un exemple en C++ pour montrer la spécialisation et la généralisation:
 //example
 
 class Animal {
- public:
+public:
   virtual void makeSound() = 0;
 };
 
 class Dog : public Animal {
- public:
+public:
   void makeSound() override { std::cout << "Woof!" << std::endl; }
 };
 
 class Cat : public Animal {
- public:
+public:
   void makeSound() override { std::cout << "Meow!" << std::endl; }
 };
 
 Dans cet exemple, la classe Animal est une classe de base qui définit une méthode virtuelle pure makeSound().
- Les classes Dog et Cat sont des classes dérivées qui spécialisent la classe de base Animal en surchargeant
- la méthode makeSound() pour fournir leur propre implémentation. La généralisation est représentée par
- la définition de la classe de base Animal, qui encapsule le comportement commun à tous les animaux.
+Les classes Dog et Cat sont des classes dérivées qui spécialisent la classe de base Animal en surchargeant
+la méthode makeSound() pour fournir leur propre implémentation. La généralisation est représentée par
+la définition de la classe de base Animal, qui encapsule le comportement commun à tous les animaux.
 
 */
 
@@ -226,10 +284,10 @@ La différence entre une méthode virtuelle et une méthode virtuelle pure est l
 tandis qu'une méthode virtuelle pure n'a pas de corps de méthode dans la classe de base.
 
 2/Une méthode virtuelle peut être surchargée dans une classe dérivée (sinon on affiche la virtual de base),
- tandis qu'une méthode virtuelle pure #doit être surchargée dans une classe dérivée (sinn error).
+tandis qu'une méthode virtuelle pure #doit être surchargée dans une classe dérivée (sinn error).
 
 3/Une méthode virtuelle peut être appelée sur un objet de la classe de base,
- tandis qu'une méthode virtuelle pure ne peut pas être appelée sur un objet de la classe de base.
+tandis qu'une méthode virtuelle pure ne peut pas être appelée sur un objet de la classe de base.
 
 Une classe qui définit une méthode virtuelle pure ne peut pas être
 instanciée(cree un objet apartir de cette class),car elle est considérée comme une classe abstraite.
